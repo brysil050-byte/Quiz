@@ -1,0 +1,59 @@
+<script>
+let perguntas = [
+  { pergunta: "Qual letra tem o som 'ei'?", a: "E", b: "A", c: "I", d: "O", correta: "b" },
+  { pergunta: "Qual letra tem o som 'bi' (bee)?", a: "B", b: "D", c: "P", d: "T", correta: "a" },
+  { pergunta: "Qual letra tem o som 'ci' (see)?", a: "S", b: "C", c: "Z", d: "E", correta: "b" },
+  { pergunta: "Qual letra tem o som 'di' (dee)?", a: "T", b: "B", c: "D", d: "G", correta: "c" },
+  { pergunta: "Qual letra tem o som 'i' (como 'ii')?", a: "I", b: "E", c: "A", d: "Y", correta: "a" },
+  { pergunta: "Qual letra tem o som 'ou'?", a: "U", b: "O", c: "Q", d: "W", correta: "b" },
+  { pergunta: "Qual letra tem o som 'iu' (you)?", a: "U", b: "W", c: "Q", d: "Y", correta: "a" },
+  { pergunta: "Qual letra tem o som 'duplo u' (double u)?", a: "U", b: "W", c: "V", d: "Y", correta: "b" },
+  { pergunta: "Qual letra tem o som 'ar'?", a: "R", b: "A", c: "H", d: "L", correta: "a" },
+  { pergunta: "Qual letra tem o som 'ti' (tee)?", a: "D", b: "T", c: "P", d: "B", correta: "b" }
+];
+
+let atual = 0;
+let pontos = 0;
+
+function mostrarPergunta() {
+  let p = perguntas[atual];
+
+  document.getElementById("quiz").innerHTML = `
+    <p><b>${atual + 1}. ${p.pergunta}</b></p>
+    <button onclick="responder('a')">A) ${p.a}</button><br>
+    <button onclick="responder('b')">B) ${p.b}</button><br>
+    <button onclick="responder('c')">C) ${p.c}</button><br>
+    <button onclick="responder('d')">D) ${p.d}</button><br>
+  `;
+}
+
+function responder(escolha) {
+  if (escolha === perguntas[atual].correta) {
+    pontos++;
+  }
+
+  atual++;
+
+  if (atual < perguntas.length) {
+    mostrarPergunta();
+  } else {
+    mostrarResultado();
+  }
+}
+
+function mostrarResultado() {
+  document.getElementById("quiz").innerHTML = `
+    <h2>🎉 Resultado final</h2>
+    <p>Você acertou ${pontos} de ${perguntas.length} perguntas</p>
+    <button onclick="reiniciar()">Refazer Quiz</button>
+  `;
+}
+
+function reiniciar() {
+  atual = 0;
+  pontos = 0;
+  mostrarPergunta();
+}
+
+mostrarPergunta();
+</script>
